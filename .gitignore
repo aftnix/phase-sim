@@ -11,3 +11,7 @@
 *.lai
 *.la
 *.a
+#binary
+a.out
+#data file
+*.dat
