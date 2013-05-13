@@ -20,7 +20,7 @@ struct Lattice * initLattice(int size )
 
 }
 
-void setSpin(bool spin, struct Lattice *L)
+void setSpinEx(bool spin, struct Lattice *L)
 {
 	int i = 0;
 	if(spin) {
@@ -40,4 +40,14 @@ int getMag(struct Lattice *L)
 	M = abs(M);
 	return M;
 
+}
+
+void setSpin(struct Lattice *L, int i, int j, bool spin) 
+{
+	*(L->cursor + L->S * i + j) = spin;
+}
+
+int getSpin(struct Lattice *L, int i, int j)
+{
+	return *(L->cursor + L->S * i + j);
 }
