@@ -76,7 +76,7 @@ int next( int x){
  return(y);
 } 
 
-
+void initLattice()
 
 int main(void){
 
