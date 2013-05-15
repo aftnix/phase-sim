@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "mc.h"
+
 struct config cfg;
 
 struct Lattice * initConfig(int size, int ignore, int sweeps,
@@ -18,15 +20,24 @@ struct Lattice * initConfig(int size, int ignore, int sweeps,
 }
 
 int main() {
+	int k;
+	double M, M_av;
+	double T;
 	struct Lattice *L = initConfig(40, 2000, 12000, 4.0, 0.0, 50, 3509 );
 
-	float dT = (cfg.final_T - cfg.init_T)/ cfg.steps;
+	T = cfg.init_T;
+
+	FILE *fp;
+	fp = fopen("phase-sim.dat", "w");
+
+	double dT = (cfg.final_T - cfg.init_T)/ cfg.steps;
 
 	for (k = 0; k <= cfg.steps; k++) {
 		M = 0.0;
-		M = matropolis(cfg, L);
+		M = metropolis(L, cfg, T);
 
 		M_av = M/(cfg.sweeps - cfg.ignore);
+		fprintf(fp,"%f    %f\n", T, M_av );
 		T += dT;
 	}
 }
