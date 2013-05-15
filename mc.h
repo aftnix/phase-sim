@@ -1,6 +1,10 @@
 #ifndef __MC_H__
 #define __MC_H__
 
-void metropolis(int sweeps, int seed, struct Lattice *L );
+#include "lattice.h"
+#include "mc.h"
+#include "cfg.h"
 
-#endif __MC_H__
+int metropolis(struct Lattice *L, struct config cfg, double T );
+
+#endif

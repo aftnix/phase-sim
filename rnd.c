@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 float rnd(int seed)
    {
 /*    linear congruential random number generator with shuffling */

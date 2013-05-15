@@ -2,10 +2,9 @@
 #include <math.h>
 
 #include "rnd.h"
-#include "lattice.h"
-#include "cfg.h"
+#include "mc.h"
 
-float metropolis(struct Lattice *L, struct config cfg, double T )
+int metropolis(struct Lattice *L, struct config cfg, double T )
 {
 	int n, i, j, M = 0;
 
