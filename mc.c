@@ -4,6 +4,24 @@
 #include "rnd.h"
 #include "mc.h"
 
+static inline int prev(int x, struct Lattice *L) {
+	int y;
+	if (x == 0) 
+		y = L->S - 1;
+	else
+		y = x - 1;
+	return y;
+}
+
+static inline int next(int x, struct Lattice *L) {
+	int y;
+	if (x == (L->S -1))
+		y = 0;
+	else
+		y = x + 1;
+	return y;
+}
+
 int metropolis(struct Lattice *L, struct config cfg, double T )
 {
 	int n, i, j, M = 0;
@@ -17,12 +35,14 @@ int metropolis(struct Lattice *L, struct config cfg, double T )
 		for (i = 0; i <= L->S; i++) {
 			for (j = 0; j <= L->S; j++) {
   				bondE = *(L->cursor + (L->S) * i + j) *
-  					(*(L->cursor + (L->S)* i + j - 1) +
-  						*(L->cursor + L->S * i + j + 1) +
-  							*(L->cursor + L->S * (i - 1) +j) +
-  								*(L->cursor) + L->S * (i + 1) + j);
+  					(*(L->cursor + (L->S)* i + prev(j, L)) +
+  						*(L->cursor + L->S * i + next(j, L)) +
+  							*(L->cursor + L->S * prev(i, L) +j) +
+  								*(L->cursor) + L->S * next(i, L) + j);
 
   				p = exp(-2.0 * bondE/T); //calculating boltzman propablity.
+
+
 
   				x = rnd(cfg.seed) * 16807;
   				if (p > x) {

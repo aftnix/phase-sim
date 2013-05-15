@@ -5,10 +5,10 @@ struct config {
 	int seed;
 	int steps;
 	int ignore;
-	float init_T;
-	float final_T;
+	double init_T;
+	double final_T;
 	int size;
 };
 
-#define MAGIC
+
 #endif

@@ -20,6 +20,7 @@ struct Lattice * initConfig(int size, int ignore, int sweeps,
 	cfg.steps = steps;
 
 	struct Lattice *L = initLattice(cfg.size);
+	setSpinEx(1, L);
 	return L;	
 }
 
@@ -27,7 +28,7 @@ int main() {
 	int k;
 	double M, M_av;
 	double T;
-	struct Lattice *L = initConfig(40, 2000, 12000, 4.0, 0.0, 50, 3509 );
+	struct Lattice *L = initConfig(10, 2000, 12000, 4.0, 0.0, 50, 3509 );
 
 	T = cfg.init_T;
 
@@ -41,9 +42,6 @@ int main() {
 	for (k = 0; k <= cfg.steps; k++) {
 		M = 0.0;
 		M = metropolis(L, cfg, T);
-
-		printf("%f\n ", M);
-
 		M_av = M/(cfg.sweeps - cfg.ignore);
 		fprintf(fp,"%f    %f\n", T, M_av );
 		T += dT;

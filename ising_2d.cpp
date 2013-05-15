@@ -5,7 +5,7 @@
 
 using namespace std;
 
-#define L 40 // The size of the lattice
+#define L 10 // The size of the lattice
 
 
 // here goes the functions for  my 16807 generator

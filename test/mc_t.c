@@ -16,9 +16,10 @@ int main() {
 	cfg.seed = 3509;
 	cfg.ignore = 2000;
 
-	L = initLattice(50);
+	L = initLattice(40);
+	setSpinEx(1, L);
 
-	for (i = 0; i < 5; i++) {
+	for (i = 1; i < 10; i++) {
 		M = metropolis(L, cfg, i/2.0);
 		printf(" Magnetization for T[%f] is M[%d]\n", i/2.0, M);
 
