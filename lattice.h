@@ -2,6 +2,8 @@
 #ifndef __LATTICE_H__
 #define __LATIICE_H__
 
+#include <stdbool.h>
+
 struct Lattice{
 	float E; //Total energy
 	float M; // Magnetization

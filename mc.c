@@ -1,26 +1,33 @@
 #include <stdlib.h>
-#include <rnd.h>
+#include <math.h>
 
-float metropolis(struct Lattice *L, struct config cfg )
+#include "rnd.h"
+#include "lattice.h"
+#include "cfg.h"
+
+float metropolis(struct Lattice *L, struct config cfg, double T )
 {
-	int n, i, j;
+	int n, i, j, M = 0;
+
+
+	double p,x;
 
 	int bondE = 0; // Bond energy
 
 	for (n = 1; n <= cfg.sweeps; n++) {
-		for (i = 0; i <= L->size; i++) {
-			for (j = 0; j <= L->size; j++) {
-  				bondE = *(L->cursor + (L->size) * i + j) *
-  					(*(L->cursor + (L->size)* i + j - 1) +
-  						*(L->cursor + L->size * i + j + 1) +
-  							*(L->cursor + L->size * (i - 1) +j) +
-  								*(L->cursor) + L->size * (i + 1) j);
+		for (i = 0; i <= L->S; i++) {
+			for (j = 0; j <= L->S; j++) {
+  				bondE = *(L->cursor + (L->S) * i + j) *
+  					(*(L->cursor + (L->S)* i + j - 1) +
+  						*(L->cursor + L->S * i + j + 1) +
+  							*(L->cursor + L->S * (i - 1) +j) +
+  								*(L->cursor) + L->S * (i + 1) + j);
 
   				p = exp(-2.0 * bondE/T); //calculating boltzman propablity.
 
   				x = rnd(cfg.seed) * 16807;
   				if (p > x) {
-  					*(L->cursor + L->size * i + j) = - *(L->cursor + L->size * i + j); 
+  					*(L->cursor + L->S * i + j) = - *(L->cursor + L->S * i + j); 
   				}
 
 			}
