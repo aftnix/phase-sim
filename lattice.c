@@ -27,6 +27,10 @@ void setSpinEx(bool spin, struct Lattice *L)
 		for(i = 0; i <= (L->S)*(L->S) -1; i++)
 			*(L->cursor + i) = 1;
 	}
+	else {
+		for(i = 0; i <= (L->S)*(L->S) -1; i++)
+			*(L->cursor + i) = -1;
+	}
 }
 
 int getMag(struct Lattice *L)

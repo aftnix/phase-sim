@@ -34,17 +34,16 @@ int metropolis(struct Lattice *L, struct config cfg, double T )
 	for (n = 1; n <= cfg.sweeps; n++) {
 		for (i = 0; i <= L->S; i++) {
 			for (j = 0; j <= L->S; j++) {
-  				bondE = *(L->cursor + (L->S) * i + j) *
-  					(*(L->cursor + (L->S)* i + prev(j, L)) +
-  						*(L->cursor + L->S * i + next(j, L)) +
-  							*(L->cursor + L->S * prev(i, L) +j) +
-  								*(L->cursor) + L->S * next(i, L) + j);
-
+  				bondE = (*(L->cursor + L->S * i +j)) * (
+  					*(L->cursor + (L->S) * i + prev(j, L))
+  					+ *(L->cursor + (L->S) * i + next(j, L))
+  					+ *(L->cursor + (L->S) * prev(i,L) + j)
+  					+ *(L->cursor + (L->S) * next(i,L) + j));
   				p = exp(-2.0 * bondE/T); //calculating boltzman propablity.
 
 
 
-  				x = rnd(cfg.seed) * 16807;
+  				x = (double)rand()/((double) RAND_MAX) ;
   				if (p > x) {
   					*(L->cursor + L->S * i + j) = - *(L->cursor + L->S * i + j); 
   				}

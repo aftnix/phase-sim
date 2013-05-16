@@ -7,8 +7,8 @@ struct Lattice{
 	float E; //Total energy
 	float M; // Magnetization
 	int S;// Size
-
-	int *cursor; //Pointer to the actual data block.
+	
+	int *cursor;
 };
 
 

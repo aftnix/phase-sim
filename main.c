@@ -20,7 +20,7 @@ struct Lattice * initConfig(int size, int ignore, int sweeps,
 	cfg.steps = steps;
 
 	struct Lattice *L = initLattice(cfg.size);
-	setSpinEx(1, L);
+	setSpinEx(0, L);
 	return L;	
 }
 
@@ -28,7 +28,7 @@ int main() {
 	int k;
 	double M, M_av;
 	double T;
-	struct Lattice *L = initConfig(10, 2000, 12000, 4.0, 0.0, 50, 3509 );
+	struct Lattice *L = initConfig(50, 2000, 12000, 4.0, 0.0, 50, 3509 );
 
 	T = cfg.init_T;
 
